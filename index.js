@@ -1,4 +1,12 @@
-var server = require('./server');
-var router = require('./router');
+var server          = require('./server');
+var router          = require('./router');
+var requestHandlers = require('./requestHandlers');
 
-server.iniciar(router.route);
+var handler = {
+    '/': requestHandlers.iniciar,
+    '/iniciar': requestHandlers.iniciar,
+    '/subir': requestHandlers.subir
+};
+
+
+server.iniciar(router.route, handler);

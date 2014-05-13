@@ -1,16 +1,16 @@
 var http    = require('http');
 var url     = require('url');
 
-function iniciar(route) {
+function iniciar(route, handler) {
     // Definir la funcion que se envia al servidor
     var onRequest = function(request, response) {
         var pathName = url.parse(request.url).pathname;
         console.log("Petición recibida para : " + pathName);
 
-        route(pathName);
+        var contenido = route(handler, pathName);
         
-        response.writeHead(200, {"Content-Type": "text/html"});
-        response.write("hola Andres..");
+        //response.writeHead(200, {"Content-Type": "text/html"});
+        response.write(contenido);
         response.end();
     }
     // Crear el servidor
